@@ -13,11 +13,18 @@ index = 0
 while index < len(times):
     total_time = int(times[index])
     total_distance = int(distances[index])
-    determinant = math.sqrt((total_time*total_time) - (4 * total_distance))
-    plus_value = math.floor((total_time + determinant)/2)
-    minus_value = math.ceil((total_time - determinant)/2)
-    total_range *= (plus_value - minus_value)
-    print(plus_value,minus_value)
+    min_time = 0
+    max_time = total_time
+    for i in range(total_time):
+        distance_traveled = (max_time-i) * i
+        if distance_traveled > total_distance:
+            min_time = i
+            break
+    for i in range(total_time,0,-1):
+        distance_traveled = (max_time-i) * i
+        if distance_traveled > total_distance:
+            max_time = i
+            break
+    total_range *= (max_time-min_time) + 1
     index += 1
-
 print(total_range)
